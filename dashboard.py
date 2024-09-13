@@ -25,10 +25,11 @@ database: dict = {
 	'Juniorzwane' : [5000]
 }
 def dashboard():
+	username = input("Please enter your username: ")
 	# Username is not yet defined because we have to recieve it from login()
 	print(f'Welcome back to your CodeBank profile {username}\n\n')
-	print('Please make a selection below:\n1. View Balance\n2.Withdraw\n3.Deposit\n4.LogOut')
-	option_Selection = input('Choose an option above e.g 1 : ')
+	print('Please make a selection below:\n1.View Balance\n2.Withdraw\n3.Deposit\n4.LogOut')
+	option_Selection = int(input('Choose an option above e.g 1 : ')) #input always returns a string so convert to integer using the int function
 	while True:
 		if option_Selection == 1:
 			print(f'Your balance is : {database.get(username)[0]}\n') # on the returned list the 0 index value is balance
