@@ -33,13 +33,13 @@ def dashboard():
 	while True:
 		if option_Selection == 1:
 			print(f'Your balance is : {database.get(username)[0]}\n') # on the returned list the 0 index value is balance
-			option_Selection = input('Choose an option above e.g 1 : ')
+			option_Selection = int(input('Choose an option above e.g 1 : '))
 		elif option_Selection == 2:
-			withdraw = input('Please enter a withdrawal amount: ')
+			withdraw = int(input('Please enter a withdrawal amount: '))
 			print(f'Your remaining balance is : {database.get(username)[0] - withdraw}\n') # on the returned list the 0 index value is balance
-			option_Selection = input('Choose an option above e.g 1 : ')
+			option_Selection = int(input('Choose an option above e.g 1 : '))
 		elif option_Selection == 3:
-			deposit = input('Enter deposit amount : ')
+			deposit = int(input('Enter deposit amount : '))
 			print(f'Your updated balance is : {database.get(username)[0] + deposit}\n')
 		elif option_Selection == 4:
 			break
