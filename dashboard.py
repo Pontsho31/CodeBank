@@ -1,4 +1,4 @@
-'''
+"""
 After the user has entered valid credentials 
 1. Store the credentials in a dictionary called database which has the values 
 	database = {
@@ -20,27 +20,57 @@ After the user has entered valid credentials
 	after the we call the login() after we have stored the values in the database
 
 4. After the sucessful login we run our while loop until the user chooses to logout 
-'''
-database: dict = {
-	'Juniorzwane' : [5000]
-}
+"""
+
+database: dict = {"Juniorzwane": [5000]}
+
+
 def dashboard():
-	username = input("Please enter your username: ")
-	# Username is not yet defined because we have to recieve it from login()
-	print(f'Welcome back to your CodeBank profile {username}\n\n')
-	print('Please make a selection below:\n1.View Balance\n2.Withdraw\n3.Deposit\n4.LogOut')
-	option_Selection = int(input('Choose an option above e.g 1 : ')) #input always returns a string so convert to integer using the int function
-	while True:
-		if option_Selection == 1:
-			print(f'Your balance is : {database.get(username)[0]}\n') # on the returned list the 0 index value is balance
-			option_Selection = int(input('Choose an option above e.g 1 : '))
-		elif option_Selection == 2:
-			withdraw = int(input('Please enter a withdrawal amount: '))
-			print(f'Your remaining balance is : {database.get(username)[0] - withdraw}\n') # on the returned list the 0 index value is balance
-			option_Selection = int(input('Choose an option above e.g 1 : '))
-		elif option_Selection == 3:
-			deposit = int(input('Enter deposit amount : '))
-			print(f'Your updated balance is : {database.get(username)[0] + deposit}\n')
-		elif option_Selection == 4:
-			break
+    username = input("Please enter your username: ")
+    balance = database.get(username)[
+        0
+    ]  # assign the balance to a variable for easier access
+    # Username is not yet defined because we have to recieve it from login()
+    print(
+        f"Welcome back to your CodeBank profile {username}\nYour current balance is {balance}\n"
+    )
+    print("Please make a selection below:\n1.Withdraw\n2.Deposit\n3.LogOut")
+    option_Selection = int(
+        input("Choose an option above e.g 1 : ")
+    )  # input always returns a string so convert to integer using the int function
+    while True:
+        # if option_Selection == 1:
+        # 	print(f'Your balance is : {balance}\n') # on the returned list the 0 index value is balance
+        # 	option_Selection = int(input('Choose an option above e.g 1 : '))
+        if option_Selection == 1:
+            withdraw = int(input("Please enter a withdrawal amount: "))
+            if (
+                withdraw > balance
+            ):  # error handling for instances where the amount entered is greater than the balance
+                print("Insufficient funds for the amount selected\n")
+            else:
+                balance = (
+                    balance - withdraw
+                )  # updating the balance after withdrawing x amount of money
+                print(
+                    f"Your remaining balance is : {balance}\nThank you for using CodeBank!\n"
+                )  # returning the new balance
+                option_Selection = int(input("Choose an option above e.g 1 : "))
+        elif option_Selection == 2:
+            deposit = int(input("Enter deposit amount : "))
+            balance = (
+                balance + deposit
+            )  # updating the balance after depositing x amount of money
+            print(
+                f"Your updated balance is : {balance}\nThank you for using CodeBank!\n"
+            )
+            option_Selection = int(input("Choose an option above e.g 1 : "))
+        elif option_Selection == 3:
+            print("Thank you for using CodeBank...\nLogging out.")
+            break
+        else:
+            print(f"Please enter a valid input\n")
+            option_Selection = int(input("Choose an option above e.g 1 : "))
+
+
 dashboard()
