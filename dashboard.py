@@ -22,13 +22,12 @@ After the user has entered valid credentials
 4. After the sucessful login we run our while loop until the user chooses to logout 
 """
 
-database: dict = {"Juniorzwane": [5000]}
+database: dict = {"Juniorzwane": ["1234" ,5000]}
 
 
-def dashboard():
-    username = input("Please enter your username: ")
+def dashboard(username):
     balance = database.get(username)[
-        0
+        1
     ]  # assign the balance to a variable for easier access
     # Username is not yet defined because we have to recieve it from login()
     print(
@@ -72,5 +71,34 @@ def dashboard():
             print(f"Please enter a valid input\n")
             option_Selection = int(input("Choose an option above e.g 1 : "))
 
+def register():
+    '''
+    This fucntion is used to register the user 
+    >>> username 
+    '''
+    return 
 
- dashboard()
+def login():
+    global username
+    username = input("Enter your username ")
+    if username in database:
+        password = input("Enter your password")
+        if(database[username][0] == password):
+            dashboard(username)
+        else:
+            print("Error, incorrect password")
+    else:
+        print("THe user name does not exist, register for a new account")
+        register()
+    return username
+ 
+def accessAccount():
+    accessAcc = input("Welcome to CodeBank\nWould you like to 'login' or 'register'? ")
+    if(accessAcc.lower() == "login"):
+        login()
+    elif(accessAcc.lower() == "register"):
+        register()
+    else:
+        return print("invalid input")
+
+accessAccount()
